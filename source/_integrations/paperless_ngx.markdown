@@ -4,6 +4,7 @@ description: Instructions on how to integrate Paperless-ngx into Home Assistant
 ha_release: 2025.6
 ha_category:
   - Sensor
+  - To-do list
   - Update
 ha_iot_class: Local Polling
 ha_config_flow: true
@@ -16,8 +17,9 @@ related:
   - url: https://docs.paperless-ngx.com/
     title: Paperless-ngx
 ha_platforms:
-  - diagnostics
   - sensor
+  - todo
+  - diagnostics
   - update
 ---
 
@@ -68,23 +70,24 @@ Below is an overview of these entities and their function.
 
 This integration provides {% term sensors %} for the following information from Paperless-ngx:
 
-| Sensor                   | Description                                                                    |
-|--------------------------|--------------------------------------------------------------------------------|
-| **Correspondents**       | Indicates the total number of defined correspondents.                          |
-| **Document types**       | Indicates the total number of defined document types.                          |
-| **Documents in inbox**   | Indicates the number of documents currently in the inbox.                      |
-| **Tags**                 | Indicates the total number of defined tags                                     |
-| **Total characters**     | Indicates the total number of characters extracted from all documents.         |
-| **Total documents**      | Indicates the total number of documents stored.                                |
-| **Total storage**        | Indicates the total disk space used by Paperless-ngx.                          |
-| **Available storage**    | Indicates the remaining available disk space for Paperless-ngx.                |
-| **Status database**      | Indicates whether the database is reachable and functioning correctly.         |
-| **Status index**         | Indicates whether the document indexing service is operational.                |
-| **Status classifier**    | Indicates whether the document classifier service is running properly.         |
-| **Status Celery**        | Indicates whether the Celery task queue is active and processing tasks.        |
-| **Status Redis**         | Indicates whether the Redis service used for task queuing is available.        |
-| **Status sanity**        | Indicates the sanity of the Paperless-ngx documents.                           |
-| **Software**             | Indicates whether a new Paperless-ngx update ist available.                    |
+| Sensor                   | Description                                                                          |
+|--------------------------|--------------------------------------------------------------------------------------|
+| **Correspondents**       | Indicates the total number of defined correspondents.                                |
+| **Document types**       | Indicates the total number of defined document types.                                |
+| **Documents in inbox**   | Indicates the number of documents currently in the inbox.                            |
+| **Tags**                 | Indicates the total number of defined tags                                           |
+| **Total characters**     | Indicates the total number of characters extracted from all documents.               |
+| **Total documents**      | Indicates the total number of documents stored.                                      |
+| **Document inbox**       | Todo list of all inbox documents. Inbox-Tags are removed if todo item is completed.  |
+| **Total storage**        | Indicates the total disk space used by Paperless-ngx.                                |
+| **Available storage**    | Indicates the remaining available disk space for Paperless-ngx.                      |
+| **Status database**      | Indicates whether the database is reachable and functioning correctly.               |
+| **Status index**         | Indicates whether the document indexing service is operational.                      |
+| **Status classifier**    | Indicates whether the document classifier service is running properly.               |
+| **Status Celery**        | Indicates whether the Celery task queue is active and processing tasks.              |
+| **Status Redis**         | Indicates whether the Redis service used for task queuing is available.              |
+| **Status sanity**        | Indicates the sanity of the Paperless-ngx documents.                                 |
+| **Software**             | Indicates whether a new Paperless-ngx update ist available.                          |
 
 ## Example automations
 
@@ -120,9 +123,10 @@ actions:
 
 This integration retrieves data using a pull-based mechanism.
 
-- **Statistic sensors** are pulled every **120 seconds**  
-- **Diagnostic sensors** are pulled every **300 seconds**  
-- **Update checks** to detect new Paperless-ngx versions are performed **every 24 hours**
+- **Statistic sensors** are pulled every **120 seconds**
+- **Inbox todo list** is pulled every **120 seconds**
+- **Diagnostic sensors** are pulled every **300 seconds**
+- **Update checks** to detect new Paperless-ngx versions are performed every **24 hours**
 
 ## Known limitations
 
